@@ -1,0 +1,18 @@
+[package]
+name = "blog_os"
+version = "0.1.0"
+edition = "2024"
+authors = ["Ibuki Shinzato<e235718@ie.u-ryukyu.ac.jp>"]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+[[bin]]
+name = "blog_os"
+test = false
+bench = false
+
+[dependencies]
