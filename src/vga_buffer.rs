@@ -7,7 +7,7 @@ use volatile::Volatile;
 lazy_static! {
     pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer {
         column_position: 0,
-        color_code: ColorCode::new(Color::LightCyan, Color::Black),
+        color_code: ColorCode::new(Color::LightCyan, Color::White),
         buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
     });
 }
@@ -71,6 +71,10 @@ pub struct Writer {
 }
 
 impl Writer {
+    pub fn init(&mut self) {
+        (0..BUFFER_HEIGHT).for_each(|row| self.clear_row(row))
+    }
+
     pub fn write_byte(&mut self, byte: u8) {
         match byte {
             // 改行
